@@ -39,7 +39,7 @@ class NotesController < ApplicationController
   end
 
   def create
-     byebug
+    # byebug
     @note = Note.new(note_params)
     @note.user = current_user
     if @note.save
