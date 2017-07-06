@@ -25,6 +25,10 @@ class NotesController < ApplicationController
     end
   end
 
+  def show_all
+    @notes = Note.all
+  end
+
   def show
     @note = Note.find(params[:id])
     @like = Like.find_by(note_id: @note.id, user_id: current_user.id)

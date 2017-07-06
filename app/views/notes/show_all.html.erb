@@ -28,24 +28,6 @@
           <p>No liked note</p>
         <% end %>
       </table>
-
-      <h2>Users</h2>
-      <table>
-        <% if @users != nil %>
-          <tr>
-            <td>User id</td>
-            <td>User email</td>
-          </tr>
-          <% @users.each do |user| %>
-            <td><%= user.id %></td>
-            <td><%= user.email %></td>
-          </tr>
-          <% end %>
-        <% else %>
-          <p>No user followed</p>
-        <% end %>
-      </table>
-
     </div>
   </div>
 </div>
