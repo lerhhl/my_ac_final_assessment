@@ -5,12 +5,12 @@
       <h2>Notes</h2>
       <table>
         <% if @notes != nil %>
-          <tr>
-            <td>Body</td>
-            <td>User email</td>
+          <thead>
+            <td><h4><strong>Body</strong></h4></td>
+            <td><h4><strong>Email</strong></h4></td>
             <td></td>
             <td></td>
-          </tr>
+          </thead>
           <% @notes.each do |note| %>
           <tr>
             <td><%= link_to note.body, note_path(note) %></td>
@@ -32,10 +32,10 @@
       <h2>Users</h2>
       <table>
         <% if @users != nil %>
-          <tr>
-            <td>User id</td>
-            <td>User email</td>
-          </tr>
+          <thead>
+            <td><h4><strong>User Id</strong></h4></td>
+            <td><h4><strong>Email</strong></h4></td>
+          </thead>
           <% @users.each do |user| %>
             <td><%= user.id %></td>
             <td><%= user.email %></td>

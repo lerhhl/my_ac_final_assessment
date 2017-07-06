@@ -5,13 +5,13 @@
       <h2>Notes</h2>
       <table>
         <% if @notes != nil %>
-          <tr>
-            <td>Body</td>
-            <td>User email</td>
+          <thead>
+            <td><h4><strong>Body</strong></h4></td>
+            <td><h4><strong>Email</strong></h4></td>
             <td></td>
             <td></td>
-          </tr>
-          <% @notes.each do |note| %>
+          </thead>
+          <% @notes.reverse.each do |note| %>
           <tr>
             <td><%= link_to note.body, note_path(note) %></td>
             <td><%= note.user.email %></td>
