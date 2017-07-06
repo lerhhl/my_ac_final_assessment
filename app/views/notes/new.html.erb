@@ -1,2 +1,16 @@
-<h1>Notes#new</h1>
-<p>Find me in app/views/notes/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+      <div><h3>New Note</h3></div>
+      <table>
+        <%= form_for @note do |f| %>
+          <tr>
+            <td><%= f.label :body %></td>
+            <td><%= f.text_area :body %></td>
+          </tr>
+          <tr><td colspan="2"><%= f.submit %></td></tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

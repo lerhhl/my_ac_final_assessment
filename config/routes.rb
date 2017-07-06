@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   root 'notes#index'
 
+  get 'users/index', to: "users#index"
   resources :relationships, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
   resources :notes

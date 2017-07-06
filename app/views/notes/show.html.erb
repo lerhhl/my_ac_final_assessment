@@ -1,2 +1,26 @@
-<h1>Notes#show</h1>
-<p>Find me in app/views/notes/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3">
+      <div><h3>Note details</h3></div>
+      <div><h4><%= @note.body %></h4></div>
+        <div><button>
+          <% if Like.find_by(note_id: @note.id, user_id: current_user.id) == nil %>
+            <%= link_to "like note", likes_path(note_id: @note.id), method: :create %>
+          <% else %>
+            <%= link_to "unlike note", like_path(@like, note_id: @note.id), method: :delete %>
+          <% end %>
+        </button></div>
+      <div><h5>Created by: <%= @note.user.email %></h5>
+      <% if current_user != @note.user %>
+        <button>
+          <% if Relationship.find_by(follower_id: current_user.id, followed_id: @note.user.id) == nil %>
+            <%= link_to "Follow user", relationships_path(followed_id: @note.user.id, note_id: @note.id), method: :create %>
+          <% else %>
+            <%= link_to "Unfollow user", relationship_path(@relationship, note_id: @note.id), method: :delete %>
+          <% end %>
+        </button>
+      <% end %>
+      </div>      
+    </div>
+  </div>
+</div>
