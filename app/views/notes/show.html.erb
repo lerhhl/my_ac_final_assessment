@@ -11,15 +11,6 @@
           <% end %>
         </button></div>
       <div><h5>Created by: <%= @note.user.email %></h5>
-      <% if current_user != @note.user %>
-        <button>
-          <% if Relationship.find_by(follower_id: current_user.id, followed_id: @note.user.id) == nil %>
-            <%= link_to "Follow user", relationships_path(followed_id: @note.user.id, note_id: @note.id), method: :create %>
-          <% else %>
-            <%= link_to "Unfollow user", relationship_path(@relationship, note_id: @note.id), method: :delete %>
-          <% end %>
-        </button>
-      <% end %>
       </div>      
     </div>
   </div>

@@ -3,16 +3,14 @@ class RelationshipsController < ApplicationController
   
   def create
     @user = User.find(params[:followed_id])
-    @note = Note.find(params[:note_id])
     current_user.following.push(@user)
-    redirect_to note_path(@note)
+    redirect_to users_index_path
   end
 
   def destroy
     @user = Relationship.find(params[:id]).followed
-    @note = Note.find(params[:note_id])
     current_user.following.delete(@user)
-    redirect_to note_path(@note)
+    redirect_to users_index_path
   end
 
 end

@@ -1,43 +1,48 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h2>All notes</h2>
+
+      <h2>Notes</h2>
       <table>
-        <tr>
-          <td>Body</td>
-          <td>User email</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <% @notes.each do |note| %>
-          <td><%= link_to note.body, note_path(note) %></td>
-          <td><%= note.user.email %></td>
-          <td></td>
-            <% if note.user != current_user %>
-              <td><%= link_to "edit", edit_note_path(note) %></td>
-              <td><%= link_to "delete", note_path(note), method: :delete, data:{ confirm: "Are you sure?" } %></td>
-            <% else %>
-              <td></td>
-              <td></td>
-            <% end %>
-        </tr>
+        <% if @notes != nil %>
+          <tr>
+            <td>Body</td>
+            <td>User email</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <% @notes.each do |note| %>
+          <tr>
+            <td><%= link_to note.body, note_path(note) %></td>
+            <td><%= note.user.email %></td>
+              <% if note.user != current_user %>
+                <td><%= link_to "edit", edit_note_path(note) %></td>
+                <td><%= link_to "delete", note_path(note), method: :delete, data:{ confirm: "Are you sure?" } %></td>
+              <% else %>
+                <td></td>
+                <td></td>
+              <% end %>
+          </tr>
+          <% end %>
+        <% else %>
+          <p>No liked note</p>
         <% end %>
       </table>
-      <h2>All users</h2>
+
+      <h2>Users</h2>
       <table>
-        <tr>
-          <td>User id</td>
-          <td>User email</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <% @users.each do |user| %>
-          <td><%= user.id %></td>
-          <td><%= user.email %></td>
-        </tr>
+        <% if @notes != nil %>
+          <tr>
+            <td>User id</td>
+            <td>User email</td>
+          </tr>
+          <% @users.each do |user| %>
+            <td><%= user.id %></td>
+            <td><%= user.email %></td>
+          </tr>
+          <% end %>
+        <% else %>
+          <p>No user followed</p>
         <% end %>
       </table>
 

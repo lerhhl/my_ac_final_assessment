@@ -2,14 +2,32 @@ class NotesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @notes = Note.all
-    @users = User.all
+    if current_user != nil
+      if current_user.likes.empty?
+        @notes = nil
+      else
+        @likes = current_user.likes
+        @notes = @likes.map do |like|
+          Note.find(like.note_id)
+        end
+      end
+      if current_user.following.empty?
+        @users = nil
+      else  
+        @followings = current_user.following
+        @users = @followings.map do |following|
+          User.find(following.id)
+        end
+      end
+    else
+      @notes = Note.all
+      @users = User.all
+    end
   end
 
   def show
     @note = Note.find(params[:id])
     @like = Like.find_by(note_id: @note.id, user_id: current_user.id)
-    @relationship = Relationship.find_by(follower_id: current_user.id, followed_id: @note.user.id)
   end
 
   def new

@@ -5,16 +5,21 @@
         <h3>All Users List</h3>
       </div>
       <br>
-    <table>
+    <ol>
       <% @users.each do |user| %>
-        <thead>
-          <td>Name</td>
-        </thead>
-        <tr>
-        <user.name>
-        </tr>
+        <li>
+        <%= user.email %>
+          <% if current_user != user %>
+              <% if Relationship.find_by(follower_id: current_user.id, followed_id: user.id) == nil %>
+                <%= link_to "Follow user", relationships_path(followed_id: user.id), method: :create %>
+              <% else %>
+                <% @relationship = Relationship.find_by(follower_id: current_user.id, followed_id: user.id) %>
+                <%= link_to "Unfollow user", relationship_path(@relationship), method: :delete %>
+              <% end %>
+          <% end %>
+        </li>
       <% end %>
-    </table>
+    </ol>
     </div>
   </div>
 </div>
