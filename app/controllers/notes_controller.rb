@@ -3,21 +3,18 @@ class NotesController < ApplicationController
 
   def index
     if current_user != nil
-      if current_user.likes.empty?
-        @notes = nil
-      else
-        @likes = current_user.likes
-        @notes = @likes.map do |like|
-          Note.find(like.note_id)
-        end
-      end
       if current_user.following.empty?
         @users = nil
+        @notes = nil
       else  
         @followings = current_user.following
         @users = @followings.map do |following|
           User.find(following.id)
         end
+        @notes = @users.map do |user|
+          user.notes
+        end
+        @notes.flatten!
       end
     else
       @notes = Note.all
